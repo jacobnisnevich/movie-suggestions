@@ -13,23 +13,45 @@ class MovieSuggestor
     end
 
     @resultMovies.sort {|movie_a, movie_b| @resultsHash[movie_b.name] <=> @resultsHash[movie_a.name]}
+
+    moviesArrayOfHashes = []
+    @resultMovies[0..9].each do |movie|
+      moviesArrayOfHashes.push(movie.to_h)
+    end
+
+    moviesArrayOfHashes.to_json
   end
 
   def get_suggestions_by_movie(movie_name)
+    movie = Spotlite::Movie.find(movie_name).first
 
+    movie_actors = []
+    movie.cast[0..2].each do |actor|
+      movie_actors.push(actor.name)
+    end
+
+    movie_criteria = {
+      start_year => movie.year,
+      end_year => movie.year,
+      actors => movie_actors,
+      genres => movie.genres,
+      directors => movie.directors.first.name
+    }
+
+    get_suggestions_by_criteria(movie_criteria)
   end 
 
   def get_score(movie, criteria)
     score = 0
-    actors_in_common = (movie.actors & criteria.actors).length 
-    genres_in_common = (movie.genres & criteria.genres).length
+    actors_in_common = (movie.actors.map(&:downcase) & criteria.actors.map(&:downcase)).length 
+    genres_in_common = (movie.genres.map(&:downcase) & criteria.genres.map(&:downcase)).length
     if movie.year <= criteria.end_year  && movie.year >= criteria.start_year 
       score += 15
     elsif move.year <= criteria.end_year + 5 && movie.year >= criteria.start_year - 5
       score += 10
     end
 
-    if movie.director == criteria.director
+    if criteria.directors.map(&:downcase).include? movie.director.downcase
       score += 30
     end
 

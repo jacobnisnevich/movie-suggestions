@@ -41,12 +41,6 @@ class IMDBParser
           movie_genres.push(genre.text)
         end
 
-        p movie_name
-        p movie_year
-        p movie_director
-        p movie_actors
-        p movie_genres
-
         @all_movies.push(Movie.new(movie_name, movie_year, movie_actors, movie_genres, movie_director))
       end
     end
