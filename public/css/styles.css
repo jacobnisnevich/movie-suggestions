@@ -91,6 +91,10 @@ body {
 	height: 260px;
 }
 
+#results-table img { 
+	height: 350px;
+}
+
 .clearfix:after {
 	visibility: hidden;
 	display: block;
