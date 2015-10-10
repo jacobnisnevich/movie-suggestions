@@ -6,16 +6,24 @@ class IMDBParser
   def search_by_criteria(movie_criteria)
     genres = movie_criteria["genres"].join(",").sub('-', '_')
 
-    movie_criteria["actors"].each do |actor|
-      actor_id = get_person_id(actor)
-      get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
+    if movie_criteria["actors"].length == 0 && movie_criteria["director"].length == 0
+      get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&title_type=feature,tv_movie")
+    else
+      movie_criteria["actors"].each do |actor|
+        actor_id = get_person_id(actor)
+        get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
+      end
+      movie_criteria["director"].each do |director|
+        director_id = get_person_id(director)
+        get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{director_id}&title_type=feature,tv_movie")
+      end
     end
 
     @all_movies
   end
 
   def get_person_id(name)
-    "nm#{Spotlite::Person.find(name)[0].id}"
+    "nm#{Spotlite::Person.find(name)[0].imdb_id}"
   end
 
   def get_top_movies(link)
@@ -32,6 +40,12 @@ class IMDBParser
         search_result.css(".genre a").each do |genre|
           movie_genres.push(genre.text)
         end
+
+        p movie_name
+        p movie_year
+        p movie_director
+        p movie_actors
+        p movie_genres
 
         @all_movies.push(Movie.new(movie_name, movie_year, movie_actors, movie_genres, movie_director))
       end
