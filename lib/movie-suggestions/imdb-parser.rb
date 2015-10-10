@@ -6,14 +6,14 @@ class IMDBParser
   def search_by_criteria(movie_criteria)
     genres = movie_criteria["genres"].join(",").sub('-', '_')
 
-    if movie_criteria["actors"].length == 0 && movie_criteria["director"].length == 0
+    if movie_criteria["actors"].length == 0 && movie_criteria["directors"].length == 0
       get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&title_type=feature,tv_movie")
     else
       movie_criteria["actors"].each do |actor|
         actor_id = get_person_id(actor)
         get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
       end
-      movie_criteria["director"].each do |director|
+      movie_criteria["directors"].each do |director|
         director_id = get_person_id(director)
         get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{director_id}&title_type=feature,tv_movie")
       end
@@ -30,12 +30,15 @@ class IMDBParser
     doc = Nokogiri::HTML(open(link))
     doc.css(".results tr").each_with_index do |search_result, index|
       if index != 0
-        movie_name = search_result.css(".title a")[1].text
+        movie_name = search_result.css(".title a")[0].text
         movie_year = search_result.css(".year_type").text[/\((.*)\)/,1]
         movie_director = search_result.css(".credit a")[0].text
-        movie_actors = [search_result.css(".credit a")[1].text, 
-                        search_result.css(".credit a")[2].text, 
-                        search_result.css(".credit a")[3].text]
+        movie_actors = []
+        search_result.css(".credit a").each_with_index do |actor_credit, index|
+          if index != 0
+            movie_actors.push(actor_credit.text)
+          end
+        end
         movie_genres = []
         search_result.css(".genre a").each do |genre|
           movie_genres.push(genre.text)

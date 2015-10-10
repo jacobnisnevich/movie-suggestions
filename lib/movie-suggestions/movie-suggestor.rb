@@ -31,11 +31,11 @@ class MovieSuggestor
     end
 
     movie_criteria = {
-      start_year => movie.year,
-      end_year => movie.year,
-      actors => movie_actors,
-      genres => movie.genres,
-      directors => movie.directors.first.name
+      "start_year" => movie.year.to_i,
+      "end_year" => movie.year.to_i,
+      "actors" => movie_actors,
+      "genres" => movie.genres,
+      "directors" => [movie.directors.first.name]
     }
 
     get_suggestions_by_criteria(movie_criteria)
@@ -43,15 +43,15 @@ class MovieSuggestor
 
   def get_score(movie, criteria)
     score = 0
-    actors_in_common = (movie.actors.map(&:downcase) & criteria.actors.map(&:downcase)).length 
-    genres_in_common = (movie.genres.map(&:downcase) & criteria.genres.map(&:downcase)).length
-    if movie.year <= criteria.end_year  && movie.year >= criteria.start_year 
+    actors_in_common = (movie.actors.map(&:downcase) & criteria["actors"].map(&:downcase)).length 
+    genres_in_common = (movie.genres.map(&:downcase) & criteria["genres"].map(&:downcase)).length
+    if movie.year.to_i <= criteria["end_year"]  && movie.year.to_i >= criteria["start_year"] 
       score += 15
-    elsif move.year <= criteria.end_year + 5 && movie.year >= criteria.start_year - 5
+    elsif move.year.to_i <= criteria["end_year"] + 5 && movie.year.to_i >= criteria["start_year"] - 5
       score += 10
     end
 
-    if criteria.directors.map(&:downcase).include? movie.director.downcase
+    if criteria["directors"].map(&:downcase).include? movie.director.downcase
       score += 30
     end
 

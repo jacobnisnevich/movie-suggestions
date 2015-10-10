@@ -14,7 +14,7 @@ body {
 	left: 0;
 	margin: auto;
 	width: 400px;
-	height: 500px;
+	height: 400px;
 
 	padding: 20px;
 	border-radius: 5px;
@@ -22,6 +22,10 @@ body {
 	background-color: #CCC;
 	color: #333;
 	box-shadow: 5px 5px 25px #333;
+}
+
+#loading-view, #results-view {
+	display: none;
 }
 
 #search-header {
@@ -34,4 +38,64 @@ body {
 	font-family: 'Robot Slab', serif;
 	font-size: 18px;
 	margin: 15px 0;
+}
+
+#search-by-criteria input, #search-by-movie input {
+	width: 70%;
+	float: right;
+}
+
+#search-by-criteria label, #search-by-movie label {
+	width: 25%;
+	float: left;
+}
+
+.form-input-container {
+	margin: 5px 0;
+}
+
+.button-container {
+	margin: 20px;
+	text-align: center;
+}
+
+.button-container button {
+	background-color: #444;
+	color: #EEE;
+	border: 0px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.button-container button:hover {
+	cursor: pointer;
+
+	background-color: #666;
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+}
+
+#ajax-loader {
+	height: 100%;
+	width: 100%
+}
+
+#ajax-loader {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 236px;
+	height: 260px;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
 }

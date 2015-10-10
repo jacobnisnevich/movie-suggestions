@@ -13,29 +13,65 @@
 </head>
 <body>
 	<div id="search-form-container">
-		<div id="search-header">Movie Suggestor</div>
+		<div id="look-up-view">
+			<div id="search-header">Movie Suggestor</div>
 
-		<div id="search-form-title">Search by Criteria</div>
-		<form id="search-by-criteria">
-			<label for="by-criteria-genres">Gnres</label>
-			<input id="by-criteria-genres"></form>
-			<label for="by-criteria-actors">Actors</label>
-			<input id="by-criteria-actors"></form>
-			<label for="by-criteria-directors">directors</label>
-			<input id="by-criteria-directors"></form>
-			<label for="by-criteria-start_year">Start Year</label>
-			<input id="by-criteria-start_year"></form>
-			<label for="by-criteria-end_year">End Year</label>
-			<input id="by-criteria-end_year"></form>
-		</form>
+			<div id="search-form-title">Search by Criteria</div>
+			<form id="search-by-criteria" class="clearfix">
+				<div class="form-input-container clearfix">
+					<label for="by-criteria-genres">Genres</label>
+					<input id="by-criteria-genres"></input>
+				</div>
+				<div class="form-input-container clearfix">
+					<label for="by-criteria-actors">Actors</label>
+					<input id="by-criteria-actors"></input>
+				</div>
+				<div class="form-input-container clearfix">
+					<label for="by-criteria-directors">Directors</label>
+					<input id="by-criteria-directors"></input>
+				</div>
+				<div class="form-input-container clearfix">
+					<label for="by-criteria-start_year">Start Year</label>
+					<input id="by-criteria-start_year"></input>
+				</div>
+				<div class="form-input-container clearfix">
+					<label for="by-criteria-end_year">End Year</label>
+					<input id="by-criteria-end_year"></input>
+				</div>
+			</form>
 
-		<hr>
+			<div class="button-container">
+				<button id="by-criteria-submit">Submit</button>
+			</div>
 
-		<div id="search-form-title">Search by Movie</div>
-		<form id="search-by-movie">
-			<label for="by-movie-movie">Movie Name</label>
-			<input id="by-movie-movie"></form>
-		</form>
+			<hr>
+
+			<div id="search-form-title">Search by Movie</div>
+			<form id="search-by-movie" class="clearfix">
+				<div class="form-input-container clearfix">
+					<label for="by-movie-movie">Movie Name</label>
+					<input id="by-movie-movie"></input>
+				</div>
+			</form>
+
+			<div class="button-container">
+				<button id="by-movie-submit">Submit</button>
+			</div>
+		</div>
+
+		<div id="loading-view">
+			<div id="ajax-loader">
+				<img src="img/ajax-loader.gif">
+			</div>
+		</div>
+
+		<div id="results-view">
+			<div id="results-table"></div>
+
+			<div class="button-container">
+				<button id="back-button">Back to Look-Up</button>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
