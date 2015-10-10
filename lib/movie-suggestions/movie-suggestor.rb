@@ -1,6 +1,6 @@
 class MovieSuggestor
   def initialize
-
+  	"hi"
   end
 
   def get_suggestions_by_criteria(movie_criteria)
@@ -11,6 +11,6 @@ class MovieSuggestor
 
   end 
 
-  
+
 
 end
