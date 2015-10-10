@@ -4,7 +4,15 @@ class MovieSuggestor
   end
 
   def get_suggestions_by_criteria(movie_criteria)
-    
+    imdbParser = IMDBParser.new
+    @resultMovies = imdbParser.search_by_criteria(movie_criteria)
+
+    @resultsHash = {}
+    @resultMovies.each do |movie|
+      @resultsHash[movie.name] = get_score(movie, movie_criteria)
+    end
+
+    @resultMovies.sort {|movie_a, movie_b| @resultsHash[movie_b.name] <=> @resultsHash[movie_a.name]}
   end
 
   def get_suggestions_by_movie(movie_name)

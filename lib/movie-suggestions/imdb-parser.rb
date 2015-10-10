@@ -19,7 +19,7 @@ class IMDBParser
       end
     end
 
-    @all_movies
+    @all_movies.uniq {|movie| movie.name}
   end
 
   def get_person_id(name)
@@ -51,16 +51,4 @@ class IMDBParser
       end
     end
   end
-end
-
-if __FILE__ == $0
-  movie_criteria = {
-    "genres" => ["action", "sci-fi"],
-    "actors" => ["tom cruise"],
-    "start_year" => 2000,
-    "end_year" => 2010
-  }
-
-  parser = IMDBParser.new
-  parser.search_by_criteria(movie_criteria)
 end
