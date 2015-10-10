@@ -39,7 +39,7 @@ var loadResults = function(data) {
 
 	data = JSON.parse(data);
 	data.forEach(function(movieSuggestion) {
-		$("#results-table").append("<div"+ movieSuggestion.name + "</div>")
+		$("#results-table").append("<div>" + movieSuggestion.name + "</div>")
 		if (movieSuggestion.images!== null)
 		$("#results-table").append("<div>"  + "<img src='" + movieSuggestion.images + "'> </div>");
 
