@@ -39,23 +39,27 @@ var currentSlide = 0;
 var movieSuggestions = [];
 
 var backOneSlide = function() {
-	updateResultDisplay();
+	currentSlide--;
 	
 	$("#forward-one-button").prop('disabled', false);
 
 	if (currentSlide == 0) {
 		$("#back-one-button").prop('disabled', true);
 	}
+
+	updateResultDisplay();
 };
 
 var forwardOneSlide = function() {
-	updateResultDisplay();
+	currentSlide++;
 
 	$("#back-one-button").prop('disabled', false);
 
 	if (currentSlide == movieSuggestions.length - 1) {
 		$("#forward-one-button").prop('disabled', true);
 	}
+
+	updateResultDisplay();
 };
 
 var updateResultDisplay = function() {
@@ -65,6 +69,7 @@ var updateResultDisplay = function() {
 		$("#results-movie-img img").attr("src", movieSuggestion.images);
 	} else {
 		$("#results-movie-title").text(movieSuggestion.name);
+		$("#results-movie-img img").attr("src", "");
 	}
 };
 

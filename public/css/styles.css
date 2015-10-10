@@ -60,12 +60,14 @@ body {
 }
 
 .button-container-left {
-	margin: 20px;
+	text-align: left;
+}
+
+.button-container-float-left {
 	float: left;
 }
 
-.button-container-right {
-	margin: 20px;
+.button-container-float-right {
 	float: right;
 }
 
@@ -101,8 +103,12 @@ body {
 	height: 260px;
 }
 
-#results-table img { 
-	height: 350px;
+#results-display {
+	text-align: center;
+}
+
+#results-display img { 
+	height: 300px;
 }
 
 .clearfix:after {
