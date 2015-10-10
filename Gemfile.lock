@@ -26,5 +26,6 @@ PLATFORMS
 
 DEPENDENCIES
   json
+  nokogiri
   sinatra
   spotlite
