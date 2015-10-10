@@ -1,0 +1,36 @@
+body {
+	background-color: #444;
+	color: #EEE;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+}
+
+#search-form-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	width: 400px;
+	height: 500px;
+
+	padding: 20px;
+	border-radius: 5px;
+
+	background-color: #CCC;
+	color: #333;
+	box-shadow: 5px 5px 25px #333;
+}
+
+#search-header {
+	font-size: 28px;
+	font-family: 'Robot Slab', serif;
+	text-align: center;
+}
+
+#search-form-title {
+	font-family: 'Robot Slab', serif;
+	font-size: 18px;
+	margin: 15px 0;
+}
