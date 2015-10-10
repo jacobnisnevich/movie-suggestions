@@ -59,7 +59,17 @@ body {
 	text-align: center;
 }
 
-.button-container button {
+.button-container-left {
+	margin: 20px;
+	float: left;
+}
+
+.button-container-right {
+	margin: 20px;
+	float: right;
+}
+
+.simple-button {
 	background-color: #444;
 	color: #EEE;
 	border: 0px;
@@ -67,7 +77,7 @@ body {
 	border-radius: 5px;
 }
 
-.button-container button:hover {
+.simple-button:hover {
 	cursor: pointer;
 
 	background-color: #666;

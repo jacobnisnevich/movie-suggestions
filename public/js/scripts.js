@@ -29,7 +29,44 @@ $(document).ready(function() {
 		$("#results-view").hide();
 		$("#look-up-view").show();
 	});
+
+	$("#back-one-button").click(backOneSlide);
+
+	$("#forward-one-button").click(forwardOneSlide);
 });
+
+var currentSlide = 0;
+var movieSuggestions = [];
+
+var backOneSlide = function() {
+	updateResultDisplay();
+	
+	$("#forward-one-button").prop('disabled', false);
+
+	if (currentSlide == 0) {
+		$("#back-one-button").prop('disabled', true);
+	}
+};
+
+var forwardOneSlide = function() {
+	updateResultDisplay();
+
+	$("#back-one-button").prop('disabled', false);
+
+	if (currentSlide == movieSuggestions.length - 1) {
+		$("#forward-one-button").prop('disabled', true);
+	}
+};
+
+var updateResultDisplay = function() {
+	movieSuggestion = movieSuggestions[currentSlide];
+	if (movieSuggestion.images != null) {
+		$("#results-movie-title").text(movieSuggestion.name);
+		$("#results-movie-img img").attr("src", movieSuggestion.images);
+	} else {
+		$("#results-movie-title").text(movieSuggestion.name);
+	}
+};
 
 var loadResults = function(data) {
 	$("#loading-view").hide();
@@ -38,10 +75,7 @@ var loadResults = function(data) {
 	$("#results-table").empty();
 
 	data = JSON.parse(data);
-	data.forEach(function(movieSuggestion) {
-		$("#results-table").append("<div"+ movieSuggestion.name + "</div>")
-		if (movieSuggestion.images!== null)
-		$("#results-table").append("<div>"  + "<img src='" + movieSuggestion.images + "'> </div>");
+	movieSuggestions = data;
 
-	});
+	updateResultDisplay();
 };

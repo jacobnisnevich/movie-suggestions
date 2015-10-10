@@ -41,7 +41,7 @@
 			</form>
 
 			<div class="button-container">
-				<button id="by-criteria-submit">Submit</button>
+				<button id="by-criteria-submit" class="simple-button">Submit</button>
 			</div>
 
 			<hr>
@@ -55,7 +55,7 @@
 			</form>
 
 			<div class="button-container">
-				<button id="by-movie-submit">Submit</button>
+				<button id="by-movie-submit" class="simple-button">Submit</button>
 			</div>
 		</div>
 
@@ -66,10 +66,23 @@
 		</div>
 
 		<div id="results-view">
-			<div id="results-table"></div>
+			<div class="button-container-left clearfix">
+				<button id="back-button" class="simple-button">Back to Look-Up</button>
+			</div>
 
-			<div class="button-container">
-				<button id="back-button">Back to Look-Up</button>
+			<div id="results-display">
+				<div id="results-movie-title"></div>
+				<div id="results-movie-img"><img></div>
+			</div>
+
+			<div id="slideshow-controls" class="clearfix">
+				<div class="button-container-left">
+					<button id="back-one-button" class="simple-button" disabled="disabled">←</button>
+				</div>
+
+				<div class="button-container-Right">
+					<button id="forward-one-button" class="simple-button">→</button>
+				</div>
 			</div>
 		</div>
 	</div>
