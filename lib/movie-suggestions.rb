@@ -2,6 +2,7 @@ require 'json'
 require 'spotlite'
 
 [
+  "movie.rb",
   "movie-suggestor.rb"
 ].each do |file_name|
   require File.expand_path("../movie-suggestions/#{file_name}", __FILE__)
