@@ -14,12 +14,17 @@ class MovieSuggestor
 
     @resultMovies.sort {|movie_a, movie_b| @resultsHash[movie_b.name] <=> @resultsHash[movie_a.name]}
 
-    moviesArrayOfHashes = []
-    @resultMovies[0..9].each do |movie|
-      moviesArrayOfHashes.push(movie.to_h)
+    movies_hash_array = []
+    @resultMovies[0..9].each_with_index do |movie, index|
+      movie_hash = movie.to_h
+      spotlite_movie = Spotlite::Movie.find(movie_hash["name"]).first
+      if !spotlite_movie.nil?
+        movie_hash["images"] = spotlite_movie.poster_url
+        movies_hash_array.push(movie_hash)
+      end
     end
 
-    moviesArrayOfHashes.to_json
+    movies_hash_array.to_json
   end
 
   def get_suggestions_by_movie(movie_name)
