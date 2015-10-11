@@ -26,7 +26,7 @@ $(document).ready(function() {
 			loadResults(data);
 		});
 	});
-
+	
 	$("#back-button").click(function() {
 		$("#results-view").hide();
 		$("#look-up-view").show();

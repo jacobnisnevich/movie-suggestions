@@ -23,10 +23,6 @@ post '/getMovieByCriteria' do
     genres_cleaned.push(genre.strip)
   end
 
-  p actors_cleaned
-  p directors_cleaned
-  p genres_cleaned
-
   movie_criteria = {
     "start_year" => params[:start_year].to_i,
     "end_year" => params[:end_year].to_i,

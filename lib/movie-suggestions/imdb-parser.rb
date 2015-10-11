@@ -14,23 +14,21 @@ class IMDBParser
 
     if (movie_criteria["actors"].length == 0 || movie_criteria["actors"][0] == "") && 
        (movie_criteria["directors"].length == 0 || movie_criteria["directors"][0] == "")
-      movie_search_query = movie_search_query + "&title_type=feature,tv_movie"
+      get_top_movies(movie_search_query + "&title_type=feature,tv_movie")
     else
       movie_criteria["actors"].each do |actor|
         if actor != ""
           actor_id = get_person_id(actor)
-          movie_search_query = movie_search_query + "&role=#{actor_id}&title_type=feature,tv_movie"
+          get_top_movies(movie_search_query + "&role=#{actor_id}&title_type=feature,tv_movie")
         end
       end
       movie_criteria["directors"].each do |director|
         if director != ""
           director_id = get_person_id(director)
-          movie_search_query = movie_search_query + "&role=#{director_id}&title_type=feature,tv_movie"
+          get_top_movies(movie_search_query + "&role=#{director_id}&title_type=feature,tv_movie")
         end
       end
     end
-
-    get_top_movies(movie_search_query)
 
     @all_movies.uniq {|movie| movie.name}
   end
