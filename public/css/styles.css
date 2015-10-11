@@ -19,7 +19,8 @@ body {
 	padding: 20px;
 	border-radius: 5px;
 
-	background-color: #CCC;
+	background: url(http://apclinic.co.uk/wp-content/uploads/2013/09/Light-Grey-Background.jpg);
+	background-size: cover;
 	color: #333;
 	box-shadow: 5px 5px 25px #333;
 }
