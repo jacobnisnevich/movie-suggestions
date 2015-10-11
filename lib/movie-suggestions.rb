@@ -2,6 +2,7 @@ require 'json'
 require 'spotlite'
 require 'open-uri'
 require 'nokogiri'
+require 'themoviedb'
 
 [
   "movie.rb",

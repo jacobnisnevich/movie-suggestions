@@ -1,6 +1,6 @@
 class MovieSuggestor
   def initialize
-
+    Tmdb::Api.key(ENV['TMDB'])
   end
 
   def get_suggestions_by_criteria(movie_criteria)
@@ -13,13 +13,14 @@ class MovieSuggestor
     end
 
     @resultMovies.sort {|movie_a, movie_b| @resultsHash[movie_b.name] <=> @resultsHash[movie_a.name]}
+    tmdb_config = Tmdb::Configuration.new
 
     movies_hash_array = []
     @resultMovies[0..9].each_with_index do |movie, index|
       movie_hash = movie.to_h
-      spotlite_movie = Spotlite::Movie.find(movie_hash["name"]).first
-      if !spotlite_movie.nil?
-        movie_hash["images"] = spotlite_movie.poster_url
+      tmdb_movie = Tmdb::Movie.find(movie_hash["name"]).first
+      if !tmdb_movie.nil?
+        movie_hash["images"] = tmdb_config.secure_base_url + "w185" + tmdb_movie.poster_path
         movies_hash_array.push(movie_hash)
       end
     end
