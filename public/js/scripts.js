@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$("#by-criteria-submit").click(function() {
 		$("#look-up-view").hide();
 		$("#loading-view").show();
+		currentSlide = 0;
 
 		$.post("/getMovieByCriteria", {
 			"start_year": $("#by-criteria-start_year").val(),
@@ -17,6 +18,7 @@ $(document).ready(function() {
 	$("#by-movie-submit").click(function() {
 		$("#look-up-view").hide();
 		$("#loading-view").show();
+		currentSlide = 0;
 
 		$.post("/getMovieByMovie", {
 			"name": $("#by-movie-movie").val()
