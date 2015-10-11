@@ -19,6 +19,8 @@ GEM
     spotlite (0.8.3)
       httparty
       nokogiri (~> 1.6)
+    themoviedb (0.1.0)
+      httparty
     tilt (2.0.1)
 
 PLATFORMS
@@ -29,3 +31,4 @@ DEPENDENCIES
   nokogiri
   sinatra
   spotlite
+  themoviedb
