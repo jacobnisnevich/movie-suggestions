@@ -6,7 +6,8 @@ class IMDBParser
   def search_by_criteria(movie_criteria)
     genres = movie_criteria["genres"].join(",").sub('-', '_')
 
-    if movie_criteria["actors"].length == 0 && movie_criteria["directors"].length == 0
+    if (movie_criteria["actors"].length == 0 || movie_criteria["actors"][0] == "") && 
+       (movie_criteria["directors"].length == 0 || movie_criteria["directors"][0] == "")
       get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&title_type=feature,tv_movie")
     else
       movie_criteria["actors"].each do |actor|
