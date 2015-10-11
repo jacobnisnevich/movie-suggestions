@@ -10,12 +10,16 @@ class IMDBParser
       get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&title_type=feature,tv_movie")
     else
       movie_criteria["actors"].each do |actor|
-        actor_id = get_person_id(actor)
-        get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
+        if actor != ""
+          actor_id = get_person_id(actor)
+          get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
+        end
       end
       movie_criteria["directors"].each do |director|
-        director_id = get_person_id(director)
-        get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{director_id}&title_type=feature,tv_movie")
+        if director != ""
+          director_id = get_person_id(director)
+          get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{director_id}&title_type=feature,tv_movie")
+        end
       end
     end
 
@@ -23,6 +27,7 @@ class IMDBParser
   end
 
   def get_person_id(name)
+    p name
     "nm#{Spotlite::Person.find(name)[0].imdb_id}"
   end
 
