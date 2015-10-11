@@ -1,5 +1,3 @@
-require 'pry'
-
 class IMDBParser
   def initialize
     @all_movies = []
