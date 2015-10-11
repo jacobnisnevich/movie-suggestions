@@ -6,23 +6,31 @@ class IMDBParser
   def search_by_criteria(movie_criteria)
     genres = movie_criteria["genres"].join(",").sub('-', '_')
 
+    movie_search_query = "http://www.imdb.com/search/title?genres=#{genres}"
+
+    if movie_criteria["start_year"] != 0 && movie_criteria["end_year"] != 0 
+      movie_search_query = movie_search_query + "&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}"
+    end
+
     if (movie_criteria["actors"].length == 0 || movie_criteria["actors"][0] == "") && 
        (movie_criteria["directors"].length == 0 || movie_criteria["directors"][0] == "")
-      get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&title_type=feature,tv_movie")
+      movie_search_query = movie_search_query + "&title_type=feature,tv_movie"
     else
       movie_criteria["actors"].each do |actor|
         if actor != ""
           actor_id = get_person_id(actor)
-          get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{actor_id}&title_type=feature,tv_movie")
+          movie_search_query = movie_search_query + "&role=#{actor_id}&title_type=feature,tv_movie"
         end
       end
       movie_criteria["directors"].each do |director|
         if director != ""
           director_id = get_person_id(director)
-          get_top_movies("http://www.imdb.com/search/title?genres=#{genres}&release_date=#{movie_criteria["start_year"]},#{movie_criteria["end_year"]}&role=#{director_id}&title_type=feature,tv_movie")
+          movie_search_query = movie_search_query + "&role=#{director_id}&title_type=feature,tv_movie"
         end
       end
     end
+
+    get_top_movies(movie_search_query)
 
     @all_movies.uniq {|movie| movie.name}
   end

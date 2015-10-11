@@ -52,7 +52,7 @@ class MovieSuggestor
     genres_in_common = (movie.genres.map(&:downcase) & criteria["genres"].map(&:downcase)).length
     if movie.year.to_i <= criteria["end_year"]  && movie.year.to_i >= criteria["start_year"] 
       score += 15
-    elsif move.year.to_i <= criteria["end_year"] + 5 && movie.year.to_i >= criteria["start_year"] - 5
+    elsif movie.year.to_i <= criteria["end_year"] + 5 && movie.year.to_i >= criteria["start_year"] - 5
       score += 10
     end
 
