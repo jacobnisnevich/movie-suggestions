@@ -1,3 +1,5 @@
+require 'pry'
+
 class IMDBParser
   def initialize
     @all_movies = []
@@ -36,29 +38,31 @@ class IMDBParser
   end
 
   def get_person_id(name)
-    p name
     "nm#{Spotlite::Person.find(name)[0].imdb_id}"
   end
 
   def get_top_movies(link)
     doc = Nokogiri::HTML(open(link))
-    doc.css(".results tr").each_with_index do |search_result, index|
-      if index != 0
-        movie_name = search_result.css(".title a")[0].text
-        movie_year = search_result.css(".year_type").text[/\((.*)\)/,1]
-        movie_director = search_result.css(".credit a")[0].text
-        movie_actors = []
-        search_result.css(".credit a").each_with_index do |actor_credit, index|
-          if index != 0
-            movie_actors.push(actor_credit.text)
+    if doc.css("#main").text != "No results."
+      doc.css(".results tr").each_with_index do |search_result, index|
+        if index != 0 && !search_result.css(".credit a").empty?
+          movie_name = search_result.css(".title a")[0].text
+          movie_year = search_result.css(".year_type").text[/\((.*)\)/,1]
+          movie_director = search_result.css(".credit a")[0].text
+          movie_actors = []
+          search_result.css(".credit a").each_with_index do |actor_credit, index|
+            if index != 0
+              movie_actors.push(actor_credit.text)
+            end
           end
-        end
-        movie_genres = []
-        search_result.css(".genre a").each do |genre|
-          movie_genres.push(genre.text)
-        end
+          movie_genres = []
+          search_result.css(".genre a").each do |genre|
+            movie_genres.push(genre.text)
+          end
 
-        @all_movies.push(Movie.new(movie_name, movie_year, movie_actors, movie_genres, movie_director))
+          @all_movies.push(Movie.new(movie_name, movie_year, movie_actors, movie_genres, movie_director))
+          p movie_name
+        end
       end
     end
   end

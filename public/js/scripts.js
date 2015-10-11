@@ -6,9 +6,9 @@ $(document).ready(function() {
 		$.post("/getMovieByCriteria", {
 			"start_year": $("#by-criteria-start_year").val(),
 			"end_year": $("#by-criteria-end_year").val(),
-			"actors": $("#by-criteria-actors").val().replace(/ /g,'').split(','),
-			"genres": $("#by-criteria-genres").val().replace(/ /g,'').split(','),
-			"directors": $("#by-criteria-directors").val().replace(/ /g,'').split(',')
+			"actors": $("#by-criteria-actors").val().trim().split(','),
+			"genres": $("#by-criteria-genres").val().trim().split(','),
+			"directors": $("#by-criteria-directors").val().trim().split(',')
 		}, function(data) {
 			loadResults(data);
 		});
