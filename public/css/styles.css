@@ -80,10 +80,14 @@ body {
 	border-radius: 5px;
 }
 
+.simple-button[disabled=disabled], .simple-button:disabled {
+	background-color: #999;
+}
+
 .simple-button:hover {
 	cursor: pointer;
 
-	background-color: #666;
+	background-color: #999;
 	transition: all 0.3s ease;
 	-webkit-transition: all 0.3s ease;
 }
